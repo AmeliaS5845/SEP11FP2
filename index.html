@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset = "UTF-8">
+
+        <title>Model</title>
+
+        <style>
+            body{
+                margin:0;
+            }
+            canvas{
+                display:block;
+            }
+            #inst{
+                text-align: center;
+                font-size: 2000;
+            }
+        </style>
+    </head>
+    <body>
+        <div id= "inst">
+            Right click and drg your mouse to rotate the image. Scroll to zoom in and out and left click and drag to go side to side.
+        </div>
+
+       <script type= "module" src="../three.js"></script>
+        <script type= "module" src="../GLTFLoader.js"></script>
+        <script type= "module">
+
+//importing loader
+
+            import * as THREE from "https://threejs.org/build/three.module.js";
+            import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
+          // import { DragControls } from "https://threejs.org/examples/jsm/controls/DragControls.js";
+            import {GLTFLoader}from '../GLTFLoader.js';
+           
+          
+            
+         
+            
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth/window.innerHeight,
+                .01,
+                1000
+                );
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth,window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+          var loader = new GLTFLoader();
+           loader.load;
+        
+     
+
+//orbit controls
+            var manburg;
+            loader.load("l'manburgwall.gltf", function(gltf){
+                manburg = gltf.scene;
+                scene.add(gltf.scene);
+                 manburg.position.x =0;
+                manburg.position.y = 0;
+                manburg.position.z = 0;
+            });
+    /* 
+    //below is for Drag Controls 
+// cone
+            var obj;
+            loader.load("cone.gltf", function(gltf){
+                obj = gltf.scene;
+                scene.add(gltf.scene);
+                 obj.position.x =0;
+                obj.position.y = 3;
+                obj.position.z = 0;
+            });
+
+//square
+           var objs;
+            loader.load("redsquare.gltf", function(gltf){
+                objs = gltf.scene;
+                scene.add(gltf.scene);
+                objs.position.x = 8;
+                objs.position.y = 0;
+                objs.position.z = 0;
+            });
+//cylinder
+            var objss;
+            loader.load("cylender.gltf", function(gltf){
+                objss = gltf.scene;
+                scene.add(gltf.scene);
+                objss.position.x = 5;
+                objss.position.y = 0;
+                objss.position.z = 0;
+            });
+//circle
+            var circle;
+            loader.load("circle.gltf", function(gltf){
+                circle = gltf.scene;
+                scene.add(gltf.scene);
+                circle.position.x = -5;
+                circle.position.y = 0;
+                circle.position.z = 0;
+            });
+//rectangle
+            var rectangle;
+            loader.load("rectangle.gltf", function(gltf){
+                rectangle= gltf.scene;
+                scene.add(gltf.scene);
+                rectangle.position.x = -10;
+                rectangle.position.y = -5;
+                rectangle.position.z = 0;
+            });
+//green square
+            var square;
+            loader.load("greensquare.gltf", function(gltf){
+                square= gltf.scene;
+                scene.add(gltf.scene);
+                square.position.x = -10;
+                square.position.y = 5;
+                square.position.z = 0;
+            });
+            
+           */
+ /*                
+           var objects= [square, rectangle, "circle", "objss", "objs", "obj"];
+           objects[0];
+           objects[1];
+           objects[2];
+           objects[3];
+           objects[4];
+           objects[5];
+           
+           const controls = new THREE.DragControls(objects, camera, renderer.domElement);
+           
+           controls.addEventListener('dragstart', function(event){
+                event.object.material.opacity = 0.33
+                
+           });
+           controls.addEventListener('dragend', function (event) {
+               event.object.material.opacity = 1
+           });
+           
+           
+        window.addEventListener('resize', onWindowResize, false);
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight
+            camera.updateProjectionMatrix()
+            renderer.setSize(window.innerWidth, window.innerHeight)
+            render()
+        };
+
+*/
+
+
+
+
+//drag controls
+     /*      var objects= ["square", "rectangle", "circle", "objss", "objs", "obj"];
+           var controls = new DragControls( objects, camera, renderer.domElement );
+           controls.addEventListener( 'dragstart', dragStartCallback );
+ 	       controls.addEventListener( 'dragend', dragendCallback );
+
+ 	       var startColor;
+ 	       function dragStartCallback(event) {
+             	startColor = event.object.material.color.getHex();
+             	event.object.material.color.setHex(0x000000);
+             };
+            function dragendCallback(event) {
+             	event.object.material.color.setHex(startColor);
+             };
+
+            function animate()
+
+            */
+
+
+
+
+//scene lighting and animation
+        scene.background= new THREE.Color(0xffffff);
+            var light = new THREE.HemisphereLight(0xffffff, 0x000000, 2);
+            scene.add(light);
+           camera.position.x = 0;
+           camera.position.y = 0;
+           camera.position.z = 200;
+//Orbit Controls
+            var controls;
+           controls = new OrbitControls(camera, renderer.domElement);
+           
+            function animate(){
+                requestAnimationFrame(animate);
+                renderer.render(scene,camera);
+            }
+           animate();
+
+
+        </script>
+    </body>
+</html>
+
