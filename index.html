@@ -30,13 +30,9 @@
 
             import * as THREE from "https://threejs.org/build/three.module.js";
             import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
-          // import { DragControls } from "https://threejs.org/examples/jsm/controls/DragControls.js";
             import {GLTFLoader}from '../GLTFLoader.js';
-           
-          
-            
-         
-            
+
+//Make scene
             var scene = new THREE.Scene();
             var camera = new THREE.PerspectiveCamera(
                 75,
@@ -49,9 +45,6 @@
             document.body.appendChild(renderer.domElement);
           var loader = new GLTFLoader();
            loader.load;
-        
-     
-
 //orbit controls
             var manburg;
             loader.load("l'manburgwall.gltf", function(gltf){
@@ -61,8 +54,31 @@
                 manburg.position.y = 0;
                 manburg.position.z = 0;
             });
-    /* 
-    //below is for Drag Controls 
+    
+//scene lighting and animation
+        scene.background= new THREE.Color(0xffffff);
+            var light = new THREE.HemisphereLight(0xffffff, 0x000000, 2);
+            scene.add(light);
+           camera.position.x = 0;
+           camera.position.y = 0;
+           camera.position.z = 200;
+//Orbit Controls
+            var controls;
+           controls = new OrbitControls(camera, renderer.domElement);
+
+            function animate(){
+                requestAnimationFrame(animate);
+                renderer.render(scene,camera);
+            }
+           animate();
+
+
+
+
+
+
+/*
+    //below is for Drag Controls
 // cone
             var obj;
             loader.load("cone.gltf", function(gltf){
@@ -118,9 +134,9 @@
                 square.position.y = 5;
                 square.position.z = 0;
             });
-            
+
            */
- /*                
+ /*
            var objects= [square, rectangle, "circle", "objss", "objs", "obj"];
            objects[0];
            objects[1];
@@ -128,18 +144,18 @@
            objects[3];
            objects[4];
            objects[5];
-           
+
            const controls = new THREE.DragControls(objects, camera, renderer.domElement);
-           
+
            controls.addEventListener('dragstart', function(event){
                 event.object.material.opacity = 0.33
-                
+
            });
            controls.addEventListener('dragend', function (event) {
                event.object.material.opacity = 1
            });
-           
-           
+
+
         window.addEventListener('resize', onWindowResize, false);
         function onWindowResize() {
             camera.aspect = window.innerWidth / window.innerHeight
@@ -171,28 +187,6 @@
             function animate()
 
             */
-
-
-
-
-//scene lighting and animation
-        scene.background= new THREE.Color(0xffffff);
-            var light = new THREE.HemisphereLight(0xffffff, 0x000000, 2);
-            scene.add(light);
-           camera.position.x = 0;
-           camera.position.y = 0;
-           camera.position.z = 200;
-//Orbit Controls
-            var controls;
-           controls = new OrbitControls(camera, renderer.domElement);
-           
-            function animate(){
-                requestAnimationFrame(animate);
-                renderer.render(scene,camera);
-            }
-           animate();
-
-
         </script>
     </body>
 </html>
